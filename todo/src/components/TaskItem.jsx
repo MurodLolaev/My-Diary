@@ -14,7 +14,6 @@ export default function TaskItem({ task, highlight }) {
   const t = translations[language]
 
   const [isEditing, setIsEditing] = useState(false)
-  const [confirmDelete, setConfirmDelete] = useState(false)
   const [title, setTitle] = useState(task.title)
   const [date, setDate] = useState(task.date)
   const [startTime, setStartTime] = useState(task.startTime)
@@ -23,7 +22,6 @@ export default function TaskItem({ task, highlight }) {
   const itemRef = useRef(null)
   const overdue = isOverdue(task)
 
-  // при клике из уведомлений — плавно скроллим к этой задаче
   useEffect(() => {
     if (highlight && itemRef.current) {
       itemRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
@@ -49,13 +47,8 @@ export default function TaskItem({ task, highlight }) {
   }
 
   const handleDeleteClick = () => {
-    if (confirmDelete) {
-      removeTask(task.id)
-      toast.success(t.tasks.deleted)
-    } else {
-      setConfirmDelete(true)
-      setTimeout(() => setConfirmDelete(false), 3000)
-    }
+    removeTask(task.id)
+    toast.success(t.tasks.deleted)
   }
 
   if (isEditing) {
@@ -150,10 +143,8 @@ export default function TaskItem({ task, highlight }) {
         </button>
         <button
           onClick={handleDeleteClick}
-          title={confirmDelete ? t.tasks.confirmDelete : t.tasks.delete}
-          className={`p-2 rounded-md text-white transition-colors ${
-            confirmDelete ? 'bg-red-700 animate-pulse' : 'bg-red-500 hover:bg-red-600'
-          }`}
+          title={t.tasks.delete}
+          className="p-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
         >
           <Trash2 size={16} />
         </button>

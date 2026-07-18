@@ -69,7 +69,7 @@ export default function NotificationBell({ onTaskClick }) {
                 >
                   <p className="font-medium text-gray-900 dark:text-gray-100 text-sm">{task.title}</p>
                   <p className="text-xs text-red-500 dark:text-red-400 mt-0.5">
-                    {formatDateReadable(task.date, locale)} · {t.notifications.wasUntil} {task.endTime}
+                    {formatDateReadable(task.date, language)} · {t.notifications.wasUntil} {task.endTime}
                   </p>
                 </li>
               ))}
