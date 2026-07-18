@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@keyframes gradientMove {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes floatBlob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -40px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animated-gradient-bg {
+  background: linear-gradient(120deg, #eef2ff, #f5f3ff, #ecfeff, #eef2ff);
+  background-size: 300% 300%;
+  animation: gradientMove 15s ease infinite;
+}
+
+.dark .animated-gradient-bg {
+  background: linear-gradient(120deg, #0f0c29, #1a1a3c, #0f1e2e, #0f0c29);
+  background-size: 300% 300%;
+  animation: gradientMove 15s ease infinite;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(60px);
+  opacity: 0.5;
+  animation: floatBlob 12s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.glass {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.35s ease-out both;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
+}
